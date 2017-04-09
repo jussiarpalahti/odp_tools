@@ -53,7 +53,7 @@ export interface OriginalDataset {
     author: string;
     author_email: string;
     ckan_url: string;
-    extras: Extras;
+    extras?: Extras;
     groups: string[];
     id: string;
     isopen: boolean;
