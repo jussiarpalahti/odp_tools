@@ -1,0 +1,115 @@
+{
+  "author": null,
+  "author_email": null,
+  "creator_user_id": "6304106b-8c33-4550-9690-01c95f754534",
+  "date_released": "2017-03-08",
+  "date_updated": "2017-03-08",
+  "external_urls": [
+    "https://dev.hel.fi",
+    ""
+  ],
+  "geographical_coverage": [
+    "helsinki"
+  ],
+  "global_id": "",
+  "groups": [],
+  "isopen": true,
+  "keywords": {
+    "fi": [
+      "hienotagi",
+      "toinehienotagi"
+    ]
+  },
+  "license_id": "CC-BY-4.0",
+  "license_title": "Creative Commons Attribution 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "maintainer": "It's made by me",
+  "maintainer_email": "jussi.arpalahti@hel.fi",
+  "maintainer_website": "https://dev.hel.fi",
+  "metadata_created": "2017-03-08T14:44:06.210692",
+  "metadata_modified": "2017-03-08T14:46:45.892929",
+  "name": "skriptinluomaotsikko2",
+  "notes": "kuvaus",
+  "notes_translated": {
+    "en": "",
+    "fi": "kuvaus",
+    "sv": ""
+  },
+  "num_resources": 1,
+  "num_tags": 0,
+  "organization": {
+    "approval_status": "approved",
+    "created": "2017-03-08T14:41:41.101691",
+    "description": "this is my town",
+    "id": "a3f871c6-cb20-49ce-a02f-3926a336f288",
+    "image_url": "",
+    "is_organization": true,
+    "name": "siti",
+    "revision_id": "7c95f5a5-975c-4ff6-99e8-91e469522f7c",
+    "state": "active",
+    "title": "siti",
+    "type": "organization"
+  },
+  "owner_org": "a3f871c6-cb20-49ce-a02f-3926a336f288",
+  "private": false,
+  "relationships_as_object": [],
+  "relationships_as_subject": [],
+  "resources": [
+    {
+      "cache_last_updated": null,
+      "cache_url": null,
+      "created": "2017-03-08T14:46:45.112689",
+      "datastore_active": false,
+      "description": "skriptidatan kuvaus",
+      "description_translated": {
+        "en": "",
+        "fi": "datan kuvaus",
+        "sv": ""
+      },
+      "file_size": "1Gt",
+      "format": "CSV",
+      "hash": "",
+      "last_modified": null,
+      "mimetype": null,
+      "mimetype_inner": null,
+      "name": "datan nimi on hinta joka on maksettava",
+      "name_translated": {
+        "en": "",
+        "fi": "datan nimi on hinta joka on maksettava",
+        "sv": ""
+      },
+      "position": 0,
+      "position_info": "25496867.0, 6672365.0",
+      "resource_type": null,
+      "size": null,
+      "state": "active",
+      "time_series_end": "2017-05-08",
+      "time_series_precision": {
+        "fi": [
+          "muutama minuutti"
+        ]
+      },
+      "time_series_precision-en": "",
+      "time_series_precision-sv": "",
+      "time_series_start": "2017-03-08",
+      "url": "https://dev.hel.fi/projects",
+      "url_type": null
+    }
+  ],
+  "state": "active",
+  "tags": [],
+  "title": "skriptistä luotu otsikko 2",
+  "title_translated": {
+    "en": "",
+    "fi": "skriptistä luotu otsikko 2",
+    "sv": ""
+  },
+  "type": "dataset",
+  "update_frequency": {
+    "fi": [
+      "joka toinen hetki"
+    ]
+  },
+  "url": "https://dev.hel.fi/apis",
+  "version": null
+}

@@ -1,0 +1,88 @@
+{
+            "author": "Vantaan kaupungin perusopetus",
+            "author_email": "tilasto@vantaa.fi",
+            "ckan_url": "http://ckan.hri.fi/dataset/a2-ja-b2-kielten-opiskelijoiden-maara-vantaalla-kouluittain-luokka-asteittain-ja-kielen-mukaan",
+            "extras": {
+                "agency": "Vantaan kaupungin sivistystoimi / talous- ja hallintopalvelut",
+                "categories": "Opetus ja koulutus",
+                "date_released": "03/31/2014",
+                "date_updated": "08/09/2016",
+                "external_reference": "",
+                "external_reference_en": "",
+                "external_reference_se": "",
+                "geographic_coverage": "Vantaa",
+                "geographic_granularity": "Piste",
+                "notes_en": "This dataset provides statistics on students learning A2- and B2-languages in Vantaa by school, class and language.",
+                "notes_se": "",
+                "source": "Vantaan kaupungin sivistysvirasto",
+                "taxonomy_url": "",
+                "temporal_coverage-from": "2012",
+                "temporal_coverage-to": "",
+                "temporal_granularity": "vuosi",
+                "title_en": "Students learning A2- and B2-languages in Vantaa by school, class and language",
+                "title_se": "",
+                "update_frequency": "vuosi"
+            },
+            "groups": [
+                "vantaan-sivistystoimen-toimiala-perusopetus"
+            ],
+            "id": "88d2611c-ae19-480a-8f9d-4b752aa0e27c",
+            "isopen": true,
+            "license": "Creative Commons Nime\u00e4 4.0 Kansainv\u00e4linen (CC BY 4.0)",
+            "license_id": "cc-by-4-fi",
+            "maintainer": null,
+            "maintainer_email": null,
+            "metadata_created": "2014-03-31T11:29:56.375145",
+            "metadata_modified": "2016-09-08T05:51:26.711135",
+            "name": "a2-ja-b2-kielten-opiskelijoiden-maara-vantaalla-kouluittain-luokka-asteittain-ja-kielen-mukaan",
+            "notes": "Vapaaehtoisen A2-kielen opiskelijoiden m\u00e4\u00e4r\u00e4 kouluittain, luokka-asteittain ja kielen mukaan sek\u00e4 valinnaisen B2-kielen opiskelijoiden m\u00e4\u00e4r\u00e4 kouluittain, luokka-asteittain ja kielen mukaan vuodesta 2012 alkaen. Vuodesta 2013 l\u00e4htien tiedoissa on my\u00f6s ruotsin kielikylpyopetukseen ja suomi-saksa kaksikieliseen opetukseen osallistuvien m\u00e4\u00e4r\u00e4t. Tilastointiajankohta on 20.9.\r\n\r\nJokaisen vuoden tilastot ovat Excel-tiedostossa omalla v\u00e4lilehdell\u00e4.",
+            "notes_rendered": "<p>Vapaaehtoisen A2-kielen opiskelijoiden m\u00e4\u00e4r\u00e4 kouluittain, luokka-asteittain ja kielen mukaan sek\u00e4 valinnaisen B2-kielen opiskelijoiden m\u00e4\u00e4r\u00e4 kouluittain, luokka-asteittain ja kielen mukaan vuodesta 2012 alkaen. Vuodesta 2013 l\u00e4htien tiedoissa on my\u00f6s ruotsin kielikylpyopetukseen ja suomi-saksa kaksikieliseen opetukseen osallistuvien m\u00e4\u00e4r\u00e4t. Tilastointiajankohta on 20.9.\n</p>\n<p>Jokaisen vuoden tilastot ovat Excel-tiedostossa omalla v\u00e4lilehdell\u00e4.\n</p>",
+            "owner_org": "1ec2ce30-f39c-482e-afd6-dba1c28c1a68",
+            "private": false,
+            "ratings_average": null,
+            "ratings_count": 0,
+            "relationships": [],
+            "resources": [
+                {
+                    "cache_last_updated": null,
+                    "cache_url": null,
+                    "created": "2014-03-31T11:34:25.245496",
+                    "description": "Excel-tiedosto",
+                    "format": "xlsx",
+                    "hash": "",
+                    "id": "c6a06318-117f-4696-b39e-f99ab4d33298",
+                    "last_modified": null,
+                    "mimetype": null,
+                    "mimetype_inner": null,
+                    "name": "",
+                    "package_id": "88d2611c-ae19-480a-8f9d-4b752aa0e27c",
+                    "position": 0,
+                    "resource_group_id": "56a36796-966c-414f-ab76-0b451d391bde",
+                    "resource_type": "file",
+                    "size": null,
+                    "tracking_summary": {
+                        "recent": 0,
+                        "total": 0
+                    },
+                    "url": "http://datastore.hri.fi/Vantaa/opetusjakoulutus/A2-_ja_B2-kielet_peruskouluittain_ja_luokka-asteittain_2012-2015.xlsx",
+                    "webstore_last_updated": null,
+                    "webstore_url": null
+                }
+            ],
+            "revision_id": "3bd9605e-24ac-42c0-8e5c-a5f1cc5a0cd3",
+            "state": "active",
+            "tags": [
+                "kielet",
+                "koulutus",
+                "opiskelu",
+                "peruskoulut"
+            ],
+            "title": "A2- ja B2-kielten opiskelijoiden m\u00e4\u00e4r\u00e4 Vantaalla kouluittain, luokka-asteittain ja kielen mukaan",
+            "tracking_summary": {
+                "recent": 0,
+                "total": 0
+            },
+            "type": "dataset",
+            "url": "http://www.vantaa.fi/#Varhaiskasvatus ja koulutus",
+            "version": null
+        }

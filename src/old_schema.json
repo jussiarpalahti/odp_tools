@@ -1,0 +1,321 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+        "author": {
+            "id": "/properties/author",
+            "type": "string"
+        },
+        "author_email": {
+            "id": "/properties/author_email",
+            "type": "string"
+        },
+        "ckan_url": {
+            "id": "/properties/ckan_url",
+            "type": "string"
+        },
+        "extras": {
+            "id": "/properties/extras",
+            "properties": {
+                "agency": {
+                    "id": "/properties/extras/properties/agency",
+                    "type": "string"
+                },
+                "categories": {
+                    "id": "/properties/extras/properties/categories",
+                    "type": "string"
+                },
+                "date_released": {
+                    "id": "/properties/extras/properties/date_released",
+                    "type": "string"
+                },
+                "date_updated": {
+                    "id": "/properties/extras/properties/date_updated",
+                    "type": "string"
+                },
+                "external_reference": {
+                    "id": "/properties/extras/properties/external_reference",
+                    "type": "string"
+                },
+                "external_reference_en": {
+                    "id": "/properties/extras/properties/external_reference_en",
+                    "type": "string"
+                },
+                "external_reference_se": {
+                    "id": "/properties/extras/properties/external_reference_se",
+                    "type": "string"
+                },
+                "geographic_coverage": {
+                    "id": "/properties/extras/properties/geographic_coverage",
+                    "type": "string"
+                },
+                "geographic_granularity": {
+                    "id": "/properties/extras/properties/geographic_granularity",
+                    "type": "string"
+                },
+                "notes_en": {
+                    "id": "/properties/extras/properties/notes_en",
+                    "type": "string"
+                },
+                "notes_se": {
+                    "id": "/properties/extras/properties/notes_se",
+                    "type": "string"
+                },
+                "source": {
+                    "id": "/properties/extras/properties/source",
+                    "type": "string"
+                },
+                "taxonomy_url": {
+                    "id": "/properties/extras/properties/taxonomy_url",
+                    "type": "string"
+                },
+                "temporal_coverage-from": {
+                    "id": "/properties/extras/properties/temporal_coverage-from",
+                    "type": "string"
+                },
+                "temporal_coverage-to": {
+                    "id": "/properties/extras/properties/temporal_coverage-to",
+                    "type": "string"
+                },
+                "temporal_granularity": {
+                    "id": "/properties/extras/properties/temporal_granularity",
+                    "type": "string"
+                },
+                "title_en": {
+                    "id": "/properties/extras/properties/title_en",
+                    "type": "string"
+                },
+                "title_se": {
+                    "id": "/properties/extras/properties/title_se",
+                    "type": "string"
+                },
+                "update_frequency": {
+                    "id": "/properties/extras/properties/update_frequency",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "groups": {
+            "id": "/properties/groups",
+            "items": {
+                "id": "/properties/groups/items",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "id": {
+            "id": "/properties/id",
+            "type": "string"
+        },
+        "isopen": {
+            "id": "/properties/isopen",
+            "type": "boolean"
+        },
+        "license": {
+            "id": "/properties/license",
+            "type": "string"
+        },
+        "license_id": {
+            "id": "/properties/license_id",
+            "type": "string"
+        },
+        "maintainer": {
+            "id": "/properties/maintainer",
+            "type": "null"
+        },
+        "maintainer_email": {
+            "id": "/properties/maintainer_email",
+            "type": "null"
+        },
+        "metadata_created": {
+            "id": "/properties/metadata_created",
+            "type": "string"
+        },
+        "metadata_modified": {
+            "id": "/properties/metadata_modified",
+            "type": "string"
+        },
+        "name": {
+            "id": "/properties/name",
+            "type": "string"
+        },
+        "notes": {
+            "id": "/properties/notes",
+            "type": "string"
+        },
+        "notes_rendered": {
+            "id": "/properties/notes_rendered",
+            "type": "string"
+        },
+        "owner_org": {
+            "id": "/properties/owner_org",
+            "type": "string"
+        },
+        "private": {
+            "id": "/properties/private",
+            "type": "boolean"
+        },
+        "ratings_average": {
+            "id": "/properties/ratings_average",
+            "type": "null"
+        },
+        "ratings_count": {
+            "id": "/properties/ratings_count",
+            "type": "integer"
+        },
+        "relationships": {
+            "id": "/properties/relationships",
+            "items": {},
+            "type": "array"
+        },
+        "resources": {
+            "id": "/properties/resources",
+            "items": {
+                "id": "/properties/resources/items",
+                "properties": {
+                    "cache_last_updated": {
+                        "id": "/properties/resources/items/properties/cache_last_updated",
+                        "type": "null"
+                    },
+                    "cache_url": {
+                        "id": "/properties/resources/items/properties/cache_url",
+                        "type": "null"
+                    },
+                    "created": {
+                        "id": "/properties/resources/items/properties/created",
+                        "type": "string"
+                    },
+                    "description": {
+                        "id": "/properties/resources/items/properties/description",
+                        "type": "string"
+                    },
+                    "format": {
+                        "id": "/properties/resources/items/properties/format",
+                        "type": "string"
+                    },
+                    "hash": {
+                        "id": "/properties/resources/items/properties/hash",
+                        "type": "string"
+                    },
+                    "id": {
+                        "id": "/properties/resources/items/properties/id",
+                        "type": "string"
+                    },
+                    "last_modified": {
+                        "id": "/properties/resources/items/properties/last_modified",
+                        "type": "null"
+                    },
+                    "mimetype": {
+                        "id": "/properties/resources/items/properties/mimetype",
+                        "type": "null"
+                    },
+                    "mimetype_inner": {
+                        "id": "/properties/resources/items/properties/mimetype_inner",
+                        "type": "null"
+                    },
+                    "name": {
+                        "id": "/properties/resources/items/properties/name",
+                        "type": "string"
+                    },
+                    "package_id": {
+                        "id": "/properties/resources/items/properties/package_id",
+                        "type": "string"
+                    },
+                    "position": {
+                        "id": "/properties/resources/items/properties/position",
+                        "type": "integer"
+                    },
+                    "resource_group_id": {
+                        "id": "/properties/resources/items/properties/resource_group_id",
+                        "type": "string"
+                    },
+                    "resource_type": {
+                        "id": "/properties/resources/items/properties/resource_type",
+                        "type": "string"
+                    },
+                    "size": {
+                        "id": "/properties/resources/items/properties/size",
+                        "type": "null"
+                    },
+                    "tracking_summary": {
+                        "id": "/properties/resources/items/properties/tracking_summary",
+                        "properties": {
+                            "recent": {
+                                "id": "/properties/resources/items/properties/tracking_summary/properties/recent",
+                                "type": "integer"
+                            },
+                            "total": {
+                                "id": "/properties/resources/items/properties/tracking_summary/properties/total",
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "url": {
+                        "id": "/properties/resources/items/properties/url",
+                        "type": "string"
+                    },
+                    "webstore_last_updated": {
+                        "id": "/properties/resources/items/properties/webstore_last_updated",
+                        "type": "null"
+                    },
+                    "webstore_url": {
+                        "id": "/properties/resources/items/properties/webstore_url",
+                        "type": "null"
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "revision_id": {
+            "id": "/properties/revision_id",
+            "type": "string"
+        },
+        "state": {
+            "id": "/properties/state",
+            "type": "string"
+        },
+        "tags": {
+            "id": "/properties/tags",
+            "items": {
+                "id": "/properties/tags/items",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "title": {
+            "id": "/properties/title",
+            "type": "string"
+        },
+        "tracking_summary": {
+            "id": "/properties/tracking_summary",
+            "properties": {
+                "recent": {
+                    "id": "/properties/tracking_summary/properties/recent",
+                    "type": "integer"
+                },
+                "total": {
+                    "id": "/properties/tracking_summary/properties/total",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "type": {
+            "id": "/properties/type",
+            "type": "string"
+        },
+        "url": {
+            "id": "/properties/url",
+            "type": "string"
+        },
+        "version": {
+            "id": "/properties/version",
+            "type": "null"
+        }
+    },
+    "type": "object"
+}
