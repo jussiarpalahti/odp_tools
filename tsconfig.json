@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "module": "CommonJS",
     "target":"ES6",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "outFile": "init.js",
+    "outDir": "build",
     "sourceMap": true
   },
   "include": [
