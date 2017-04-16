@@ -30,7 +30,7 @@
             "id": "--check--",
             "isopen": "isopen",
             "license": "license_title",
-            "license_id": "cc-by-4-fi",
+            "license_id": "license_id",
             "maintainer": "maintainer",
             "maintainer_email": "maintainer_email",
             "metadata_created": "metadata_created",

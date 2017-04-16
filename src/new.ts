@@ -39,7 +39,7 @@ export interface TimeSeriesPrecision {
     fi: string[];
 }
 
-export interface Resource {
+export interface NewResource {
     cache_last_updated?: any;
     cache_url?: any;
     created: Date;
@@ -56,7 +56,8 @@ export interface Resource {
     name_translated: NameTranslated;
     position: number;
     position_info: string;
-    resource_type?: any;
+    resource_group_id: string;
+    resource_type?: string;
     size?: any;
     state: string;
     time_series_end: string;
@@ -108,7 +109,7 @@ export interface NewDataset {
     private: boolean;
     relationships_as_object: any[];
     relationships_as_subject: any[];
-    resources: Resource[];
+    resources: NewResource[];
     state: string;
     tags: any[];
     title: string;
