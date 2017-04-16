@@ -88,7 +88,7 @@ export interface NewDataset {
     external_urls: string[];
     geographical_coverage: string[];
     global_id: string;
-    groups: any[];
+    groups: string[];
     isopen: boolean;
     keywords: Keywords;
     license_id: string;
