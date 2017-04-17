@@ -5,15 +5,9 @@ import {OriginalDataset} from './old';
 import * as _ from 'lodash';
 import * as fs from "fs";
 
-function convert() {
+function convert(doc:OriginalDataset):NewDataset {
 
-    console.log("converting");
-    let doc = <OriginalDataset> JSON.parse(
-        fs.readFileSync('one_package.json', 'utf8'));
-    let template = <OriginalDataset> JSON.parse(
-        fs.readFileSync('template.json', 'utf8'));
-
-    let odp_doc:NewDataset;
+    let odp_doc = {} as NewDataset;
 
     odp_doc.author = doc.author;
     odp_doc.author_email = doc.author_email;
@@ -44,7 +38,7 @@ function convert() {
     // doc.relationships
 
     odp_doc.resources = doc.resources.map((res) => {
-        let ores:NewResource;
+        let ores = {} as NewResource;
         ores.cache_last_updated = res.cache_last_updated;
         ores.cache_url = res.cache_url;
         ores.created = res.created;
@@ -87,7 +81,23 @@ function convert() {
     odp_doc.url = doc.url;
     odp_doc.version = doc.version;
 
-    console.log("don't");
+    return odp_doc;
+
 }
 
-convert();
+console.log("converting");
+
+let old = JSON.parse(fs.readFileSync('hri.json', 'utf8'));
+
+let old_packages = old.packages as OriginalDataset[];
+
+let result = [] as string[];
+
+for (let doc of old_packages) {
+    // Output is in JSON stream format meaning new line separated objects
+    result.push(JSON.stringify(convert(doc)));
+}
+
+fs.writeFileSync('out.json', result.join("\n"), {encoding: 'utf8'});
+
+console.log("conversion done");
