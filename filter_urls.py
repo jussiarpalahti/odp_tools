@@ -38,7 +38,7 @@ def get_organizations():
 # get_organizations()
 
 
-def add_tags():
+def add_tags(new_hri_docs):
 
 	from ckanapi import RemoteCKAN
 	ua = 'ckanapiexample/1.0 (+http://hri.fi)'
@@ -47,8 +47,6 @@ def add_tags():
 
 	tags = c.action.tag_list(all_fields=True)
 	tags_data = dict(((g['name'], g) for g in tags))
-
-	new_hri_docs = [json.loads(doc) for doc in open('out.json').read().split("\n")]
 
 	yes_tags = set()
 	no_tags = set()
@@ -77,13 +75,8 @@ def add_tags():
 	print("----------------------")
 	print("yes group ", yes_tags)
 
-	result = [json.dumps(doc) for doc in new_hri_docs]
-	open('out_w_tags.json', 'w').write('\n'.join(result))
 
-add_tags()
-
-
-def add_groups():
+def add_groups(new_hri_docs):
 
 	from ckanapi import RemoteCKAN
 	ua = 'ckanapiexample/1.0 (+http://hri.fi)'
@@ -92,8 +85,6 @@ def add_groups():
 	
 	groups = c.action.group_list(all_fields=True)
 	groups_data = dict(((g['name'], g) for g in groups))
-
-	new_hri_docs = [json.loads(doc) for doc in open('out.json').read().split("\n")]
 
 	yes_groups = set()
 	no_groups = set()
@@ -122,5 +113,15 @@ def add_groups():
 	print("----------------------")
 	print("yes group ", yes_groups)
 
+def do_the_dance():
+
+	new_hri_docs = [json.loads(doc) for doc in open('out.json').read().split("\n")]
+
+	add_tags(new_hri_docs)
+	add_groups(new_hri_docs)
+
 	result = [json.dumps(doc) for doc in new_hri_docs]
-	open('out_w_groups.json', 'w').write('\n'.join(result))
+	open('out_w_data.json', 'w').write('\n'.join(result))
+
+
+do_the_dance()
