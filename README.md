@@ -3,5 +3,5 @@
 
 ## Conversion tools
 
-.. see src/convert.ts
-
+ * node build/convert.js
+ * python filter_urls.py
