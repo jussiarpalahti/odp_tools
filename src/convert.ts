@@ -11,11 +11,16 @@ function convert(doc:OriginalDataset):NewDataset {
 
     odp_doc.author = doc.author;
     odp_doc.author_email = doc.author_email;
+    odp_doc.date_released = "2017-03-08"; // TODO: Fix me
+    odp_doc.date_updated = "2017-03-08"; // TODO: Fix me
 
     // doc.ckan_url;
     // doc.extras;
 
     odp_doc.groups = doc.groups;
+    odp_doc.geographical_coverage = ['helsinki']; // TODO: Fix me
+    odp_doc.license_id = "CC-BY-4.0"; // TODO: Fix me
+    
 
     // doc.id;
 
