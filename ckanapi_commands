@@ -1,0 +1,19 @@
+	 cat fixed_hri_orgs.json|ckanapi load organizations -c /etc/ckan/default/production.ini
+	 ckanapi dump datasets --all --datapackages=./output_directory/
+	 ckanapi dump datasets --all --datapackages=/vagrant/datasets -z -c /etc/ckan/default/production.ini 
+	 ckanapi dump datasets --all -O datasets.jsonl.gz -z -c /etc/ckan/default/production.ini 
+	 ckanapi dump datasets --all -O datasets.jsonl.gz -z -p /etc/ckan/default/production.ini 
+	 ckanapi dump datasets --all /vagrant/datasets -z -c /etc/ckan/default/production.ini 
+	 ckanapi dump organizations --all -q -c /etc/ckan/default/production.ini > new_hri_orgs.json
+	 ckanapi dump organizations --all -q -r http://hri.fi 
+	 ckanapi dump organizations --all -q -r http://hri.fi > hri_orgs.json
+	 ckanapi load datasets -I /vagrant/import.jsonl.gz -z -c /etc/ckan/default/production.ini 
+	 ckanapi load datasets -I /vagrant/import.json -z -c /etc/ckan/default/production.ini 
+	 ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini
+	 ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini 
+	 ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini > /vagrant/import_problems.txt
+	 ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini &> /vagrant/import_problems.txt
+	 ckanapi load datasets -I /vagrant/out.json -z -c /etc/ckan/default/production.ini
+	 fc -ln 1 |grep ckanapi|sort|uniq
+	 history |grep ckanapi|sort|uniq
+	 pip install ckanapi
