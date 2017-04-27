@@ -113,15 +113,37 @@ def add_groups(new_hri_docs):
 	print("----------------------")
 	print("yes group ", yes_groups)
 
+
+def read_jsonl(doc):
+	return [json.loads(obj) for obj in open(doc).read().split('\n') if obj.strip()]
+
+def switch_new_owners(new_hri_docs, 
+	new_owners_doc='new_hri_orgs.json',
+	old_owners_doc='hri_orgs.json'):
+
+	new_owners = {i['name']: i['id'] for i in read_jsonl(new_owners_doc)}
+	old_owners = {i['id']: i['name'] for i in read_jsonl(old_owners_doc)}
+
+	for doc in new_hri_docs:
+		try:
+			doc['owner_org'] = new_owners[old_owners[doc['owner_org']]]
+		except KeyError:
+			print('HRM', doc)
+			continue
+
+
 def do_the_dance():
 
 	new_hri_docs = [json.loads(doc) for doc in open('out.json').read().split("\n")]
 
 	add_tags(new_hri_docs)
 	add_groups(new_hri_docs)
+	switch_new_owners(new_hri_docs)
 
 	result = [json.dumps(doc) for doc in new_hri_docs]
 	open('out_w_data.json', 'w').write('\n'.join(result))
 
 
-do_the_dance()
+if __name__ == '__main__':
+	do_the_dance()
+
