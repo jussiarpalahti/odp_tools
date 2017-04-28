@@ -10,7 +10,12 @@
  	cat hri_orgs.json |jq --compact-output '{name, title, description}' > fixed_hri_orgs.json
 
 
- ### Import old orgs
+### Dump new datasets
+
+	ckanapi dump datasets --all -q -c /etc/ckan/default/production.ini > datasets
+
+
+### Import old orgs
 
  	fixed_hri_orgs.json|ckanapi load organizations -c /etc/ckan/default/production.ini
 
@@ -18,6 +23,9 @@
 ### Dump old orgs as new orgs
 
  	ckanapi dump organizations --all -q -c /etc/ckan/default/production.ini > /vagrant/new_hri_orgs.json
+
+
+### Load converted datasets
  	ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini &> /vagrant/import_problems.txt
 
 
