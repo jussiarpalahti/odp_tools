@@ -1,5 +1,5 @@
 
-import {NewDataset, NewResource} from './new';
+import {NewDataset, NewResource, TitleTranslated} from './new';
 import {OriginalDataset} from './old';
 
 import * as _ from 'lodash';
@@ -17,10 +17,11 @@ function convert(doc:OriginalDataset):NewDataset {
     // doc.ckan_url;
     // doc.extras;
 
+
     odp_doc.groups = doc.groups;
     odp_doc.geographical_coverage = ['helsinki']; // TODO: Fix me
     odp_doc.license_id = "CC-BY-4.0"; // TODO: Fix me
-    
+
 
     // doc.id;
 
@@ -79,6 +80,9 @@ function convert(doc:OriginalDataset):NewDataset {
     odp_doc.state = doc.state;
     odp_doc.tags = doc.tags;
     odp_doc.title = doc.title;
+    odp_doc.title_translated = <TitleTranslated> {
+        fi: doc.title
+    };
 
     // doc.tracking_summary
 

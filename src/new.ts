@@ -30,9 +30,9 @@ export interface DescriptionTranslated {
 }
 
 export interface NameTranslated {
-    en: string;
-    fi: string;
-    sv: string;
+    en?: string;
+    fi?: string;
+    sv?: string;
 }
 
 export interface TimeSeriesPrecision {
