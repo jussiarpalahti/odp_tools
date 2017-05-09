@@ -25,6 +25,21 @@
 
  	ckanapi dump organizations --all -q -c /etc/ckan/default/production.ini > /vagrant/new_hri_orgs.json
 
+New orgs now contain old orgs with new ids. **Remember to copy them where conversion happens**.
+
+
+### Get old HRI datasets
+
+	wget http://www.hri.fi/wp-content/uploads/ckan/hri-ckan-active-metadata-daily-output.json
+
+
+### Convert old datasets for import
+
+	# TODO: ** This first bit should be fixed **
+	cp hri-ckan-active-metadata-daily-output.json hri.json
+	node build/convert.js
+	python filter_urls.py
+
 
 ### Load converted datasets
  	ckanapi load datasets -I /vagrant/out.json -c /etc/ckan/default/production.ini &> /vagrant/import_problems.txt
@@ -34,3 +49,4 @@
 
  * node build/convert.js
  * python filter_urls.py
+
