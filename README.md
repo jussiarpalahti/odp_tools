@@ -5,6 +5,7 @@
 
 ### Get old orgs
 
+	source /usr/lib/ckan/default/bin/activate
 	ckanapi dump organizations --all -q -r http://hri.fi > hri_orgs.json
  	apt install jq
  	cat hri_orgs.json |jq --compact-output '{name, title, description}' > fixed_hri_orgs.json
@@ -17,7 +18,7 @@
 
 ### Import old orgs
 
- 	fixed_hri_orgs.json|ckanapi load organizations -c /etc/ckan/default/production.ini
+ 	cat fixed_hri_orgs.json|ckanapi load organizations -c /etc/ckan/default/production.ini
 
 
 ### Dump old orgs as new orgs
