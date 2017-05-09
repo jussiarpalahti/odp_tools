@@ -1,0 +1,23 @@
+{'categories': ['uncategorized'],
+ 'comment_status': 'open',
+ 'comments': [],
+ 'content': '<p class="caption">Senaatintori tuomiokirkkoineen ja yliopiston '
+            'p&#228;&#228;rakennuksineen. Kiehtovaa liitely&#228; Helsingin '
+            'tuttujen ja tuntemattomien tienoiden yll&#228;. Suunta kohti '
+            'kotipihaa &#8211; milt&#228; se n&#228;ytt&#228;&#228; kaupungin '
+            'uudessa 3D-mallissa? Jo pelkk&#228;&#228; mallia jaksaisi '
+            'tutkailla tuntikausia. Vaan mit&#228; kaikkia mahdollisuuksia '
+            'malli tarjoaakaan, kun se on julkaistu avoimena datana ja '
+            'sit&#228; saa hy&#246;dynt&#228;&#228; vapaasti osana omia '
+            'projektejaan?</p>',
+ 'creator': 'admin',
+ 'guid': 'https://generic-qa.dataportaali.com/?p=47',
+ 'id': 47,
+ 'link': 'https://generic-qa.dataportaali.com/helsingin-3d-kaupunkimallit-kayttoon/',
+ 'password': '',
+ 'ping_status': 'open',
+ 'pub_date': datetime.datetime(2017, 3, 8, 11, 9, 12),
+ 'slug': 'helsingin-3d-kaupunkimallit-kayttoon',
+ 'status': 'publish',
+ 'tags': [],
+ 'title': 'Helsingin 3D-kaupunkimallit k&#228;ytt&#246;&#246;n!'}
