@@ -97,13 +97,12 @@ def get_group_map(doc="hri_cat_to_groups.csv"):
     return dict(((a, b) for a,b in lines))
 
 
-def add_groups(new_hri_docs):
+from ckanapi import RemoteCKAN
+def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
 
-    from ckanapi import RemoteCKAN
-    ua = 'ckanapiexample/1.0 (+http://hri.fi)'
+    group_map = get_group_map()
     
-    c = RemoteCKAN('http://hri.fi',user_agent=ua)
-    
+    c = RemoteCKAN(ckan_source, user_agent='ckanapiexample/1.0')  
     groups = c.action.group_list(all_fields=True)
     groups_data = dict(
         ((g['name'], g) for g in groups)
@@ -118,7 +117,7 @@ def add_groups(new_hri_docs):
     
         for doc_group in doc.get('groups', []):
     
-            gdata = groups_data.get(doc_group)
+            gdata = groups_data.get(group_map[doc_group])
     
             if gdata:
                 doc_groups.append(gdata)
