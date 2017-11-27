@@ -76,6 +76,25 @@ def add_tags(new_hri_docs):
     print("yes group ", yes_tags)
 
 
+def get_cat(extras):
+    return [i['value'] for i in extras if i['key'] == 'categories']
+
+
+def cat_to_group(docs):
+    resp = {}
+    for doc in docs:
+        for cat in get_cat(doc['extras']):
+            if cat.startswith('{'):
+                vals = cat[1:-1].split(',')
+                resp[doc['id']] = [val.replace('\"', '') for val in vals]
+            else:
+                resp[doc['id']] = [cat]
+    return resp
+
+
+def get_group_map(doc="hri_cat_to_groups.csv"):
+    lines = [i.split(";") for i in open(doc).read().split('\n')]
+    return dict(((a, b) for a,b in lines))
 
 
 def add_groups(new_hri_docs):
