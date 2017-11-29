@@ -104,7 +104,7 @@ def cats_to_groups_map(doc="hri_cat_to_groups.csv"):
 from ckanapi import RemoteCKAN
 def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
 
-    group_map = get_group_map()
+    group_map = cats_to_groups_map()
     
     c = RemoteCKAN(ckan_source, user_agent='ckanapiexample/1.0')  
     groups = c.action.group_list(all_fields=True)
@@ -121,7 +121,7 @@ def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
     
         for doc_group in doc.get('groups', []):
     
-            gdata = groups_data.get(group_map[doc_group])
+            gdata = groups_data.get(group_map.get(doc_group['name']))
     
             if gdata:
                 doc_groups.append(gdata)
@@ -164,11 +164,19 @@ def switch_new_owners(new_hri_docs,
             continue
 
 
+def do_this_first(source='old_datasets.jsonl', target='out_w_data.json'):
+    new_hri_docs = [json.loads(doc) for doc in open(source).read().split("\n")]
+    cats_to_groups(new_hri_docs)
+    result = [json.dumps(doc) for doc in new_hri_docs]
+    open(target, 'w').write('\n'.join(result))
+
+
 def do_the_dance():
 
     new_hri_docs = [json.loads(doc) for doc in open('out.json').read().split("\n")]
 
-    add_tags(new_hri_docs)
+    # Full ckanapi dump has all tag information already
+    # add_tags(new_hri_docs)
     add_groups(new_hri_docs)
     switch_new_owners(new_hri_docs)
 
