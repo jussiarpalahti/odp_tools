@@ -76,14 +76,18 @@ def add_tags(new_hri_docs):
     print("yes group ", yes_tags)
 
 
-def get_cat(extras):
-    return [i['value'] for i in extras if i['key'] == 'categories']
+def flatten(a_list):
+    return [t for subl in a_list for t in subl]
 
 
-def cat_to_group(docs):
+def get_cat(doc):
+    return [i['value'] for i in doc['extras'] if i['key'] == 'categories']
+
+
+def get_cats(docs):
     resp = {}
     for doc in docs:
-        for cat in get_cat(doc['extras']):
+        for cat in get_cat(doc):
             if cat.startswith('{'):
                 vals = cat[1:-1].split(',')
                 resp[doc['id']] = [val.replace('\"', '') for val in vals]
@@ -92,7 +96,7 @@ def cat_to_group(docs):
     return resp
 
 
-def get_group_map(doc="hri_cat_to_groups.csv"):
+def cats_to_groups_map(doc="hri_cat_to_groups.csv"):
     lines = [i.split(";") for i in open(doc).read().split('\n')]
     return dict(((a, b) for a,b in lines))
 
@@ -138,6 +142,12 @@ def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
 
 def read_jsonl(doc):
     return [json.loads(obj) for obj in open(doc).read().split('\n') if obj.strip()]
+
+
+def read_gzip_jsonl(doc):
+    import gzip
+    return [json.loads(obj) for obj in gzip.open(doc, 'rt', encoding='utf-8').read().split('\n') if obj.strip()]
+
 
 def switch_new_owners(new_hri_docs, 
     new_owners_doc='new_hri_orgs.json',
