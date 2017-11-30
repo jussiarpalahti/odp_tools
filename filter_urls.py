@@ -80,19 +80,25 @@ def flatten(a_list):
     return [t for subl in a_list for t in subl]
 
 
-def get_cat(doc):
+def fetch_cats_from_doc(doc):
     return [i['value'] for i in doc['extras'] if i['key'] == 'categories']
+
+
+def get_cat(doc):
+    resp = []
+    for cat in fetch_cats_from_doc(doc):
+        if cat.startswith('{'):
+            vals = cat[1:-1].split(',')
+            resp.append([val.replace('\"', '') for val in vals])
+        else:
+            resp.append([cat])
+    return flatten(resp)
 
 
 def get_cats(docs):
     resp = {}
     for doc in docs:
-        for cat in get_cat(doc):
-            if cat.startswith('{'):
-                vals = cat[1:-1].split(',')
-                resp[doc['id']] = [val.replace('\"', '') for val in vals]
-            else:
-                resp[doc['id']] = [cat]
+        resp[doc['id']] = get_cat(doc)
     return resp
 
 
@@ -116,28 +122,19 @@ def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
     no_groups = set()
     
     for doc in new_hri_docs:
-    
+        
+        cats = get_cat(doc)
         doc_groups = []
     
-        for doc_group in doc.get('groups', []):
+        for cat in cats:
     
-            gdata = groups_data.get(group_map.get(doc_group['name']))
+            gdata = groups_data.get(group_map.get(cat))
     
             if gdata:
                 doc_groups.append(gdata)
-                yes_groups.add(doc_group)
-            else:
-                no_groups.add(doc_group)
-    
+        
         if doc_groups:
             doc['groups'] = doc_groups
-
-        elif doc.get('groups'):
-            del doc['groups']
-
-    print("no group ", no_groups)
-    print("----------------------")
-    print("yes group ", yes_groups)
 
 
 def read_jsonl(doc):
@@ -164,9 +161,9 @@ def switch_new_owners(new_hri_docs,
             continue
 
 
-def do_this_first(source='old_datasets.jsonl', target='out_w_data.json'):
-    new_hri_docs = [json.loads(doc) for doc in open(source).read().split("\n")]
-    cats_to_groups(new_hri_docs)
+def do_this_first(source='old_datasets.jsonl', target='hri.json', group_source="https://hri.dataportaali.com/data"):
+    new_hri_docs = read_jsonl(source)
+    add_groups(new_hri_docs, group_source)
     result = [json.dumps(doc) for doc in new_hri_docs]
     open(target, 'w').write('\n'.join(result))
 
@@ -177,7 +174,7 @@ def do_the_dance():
 
     # Full ckanapi dump has all tag information already
     # add_tags(new_hri_docs)
-    add_groups(new_hri_docs)
+    # add_groups(new_hri_docs)
     switch_new_owners(new_hri_docs)
 
     result = [json.dumps(doc) for doc in new_hri_docs]
