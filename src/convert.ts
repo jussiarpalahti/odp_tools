@@ -1,9 +1,70 @@
 
-import {NewDataset, NewResource, TitleTranslated} from './new';
+import {NewDataset, NewResource, TitleTranslated, NameTranslated, NotesTranslated, DescriptionTranslated} from './new';
 import {OriginalDataset} from './old';
 
 import * as _ from 'lodash';
 import * as fs from "fs";
+
+
+interface TranslatedFields {
+    title: TitleTranslated;
+    name: NameTranslated;
+    notes: NotesTranslated;
+    description: DescriptionTranslated;
+}
+
+
+function translate_fields(doc:OriginalDataset):TranslatedFields {
+    /*
+        Get translated fields from doc extra fields into one object
+    */
+
+    // TODO: external_reference field?
+
+    let translations = <TranslatedFields>{
+        title: {},
+        name: {},
+        notes: {},
+        description: {}
+    }
+
+    for (let field of doc.extras) {
+
+        let field_properties = field.key.split('_');
+
+        let identifier:string, language:string;
+        if (field_properties.length == 2) {
+            [identifier, language] = field_properties;
+        } else {
+            continue;
+        }
+
+        switch (identifier) {
+            
+            case "title":
+                translations.title[language] = field.value;
+                break;
+
+            case "name":
+                translations.name[language] = field.value;
+                break;
+            
+            case "notes":
+                translations.notes[language] = field.value;
+                break;
+        
+            case "description":
+                translations.description[language] = field.value;
+                break;
+        
+        }
+
+    }
+
+    return translations;
+
+}
+
 
 function convert(doc:OriginalDataset):NewDataset {
 
@@ -96,9 +157,13 @@ function convert(doc:OriginalDataset):NewDataset {
 
 console.log("converting");
 
-let old = JSON.parse(fs.readFileSync('hri.json', 'utf8'));
+let old = [];
+let docs = fs.readFileSync('hri.json', 'utf8');
+for (let doc of docs.split('\n')) {
+    old.push(JSON.parse(doc));
+}
 
-let old_packages = old.packages as OriginalDataset[];
+let old_packages = old as OriginalDataset[];
 
 let result = [] as string[];
 

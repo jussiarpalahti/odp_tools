@@ -1,4 +1,13 @@
 
+export interface Group {
+    description?: string;
+    display_name?: string;
+    id: string;
+    image_display_url?: string;
+    name?: string;
+    title?: string;
+}
+
 export interface Keywords {
     fi: string[];
 }
@@ -7,6 +16,7 @@ export interface NotesTranslated {
     en: string;
     fi: string;
     sv: string;
+    [key:string]: string;
 }
 
 export interface Organization {
@@ -27,12 +37,14 @@ export interface DescriptionTranslated {
     en: string;
     fi: string;
     sv: string;
+    [key:string]: string;
 }
 
 export interface NameTranslated {
     en?: string;
     fi?: string;
     sv?: string;
+    [key:string]: string;
 }
 
 export interface TimeSeriesPrecision {
@@ -73,6 +85,7 @@ export interface TitleTranslated {
     en: string;
     fi: string;
     sv: string;
+    [key:string]: string;
 }
 
 export interface UpdateFrequency {
@@ -88,7 +101,7 @@ export interface NewDataset {
     external_urls: string[];
     geographical_coverage: string[];
     global_id: string;
-    groups: string[];
+    groups: any;
     isopen: boolean;
     keywords: Keywords;
     license_id: string;

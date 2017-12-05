@@ -49,11 +49,20 @@ export interface Resource {
     webstore_url?: any;
 }
 
+export interface ExtraField {
+    __extras: {
+        package_id: string;
+        revision_id: string;
+    },
+    key: string;
+    value: string;
+}
+
 export interface OriginalDataset {
     author: string;
     author_email: string;
     ckan_url: string;
-    extras?: Extras;
+    extras?: ExtraField[];
     groups: string[];
     id: string;
     isopen: boolean;
