@@ -146,20 +146,23 @@ def read_gzip_jsonl(doc):
     return [json.loads(obj) for obj in gzip.open(doc, 'rt', encoding='utf-8').read().split('\n') if obj.strip()]
 
 
-def switch_new_owners(new_hri_docs, 
+def switch_new_owners(
+    new_hri_docs, 
     new_owners_doc='new_hri_orgs.json',
-    old_owners_doc='hri_orgs.json'):
+    old_owners_doc='old_hri_orgs.json'):
 
     new_owners = {i['name']: i['id'] for i in read_jsonl(new_owners_doc)}
     old_owners = {i['id']: i['name'] for i in read_jsonl(old_owners_doc)}
 
-    for doc in new_hri_docs:
-        try:
-            doc['owner_org'] = new_owners[old_owners[doc['owner_org']]]
-        except KeyError:
-            print('HRM', doc)
-            continue
+    problems = []
 
+    for doc in new_hri_docs:
+        if doc['owner_org'] and old_owners.get(doc['owner_org']):
+            doc['owner_org'] = new_owners[old_owners[doc['owner_org']]]
+        else:
+            problems.append(doc)
+    
+    return problems
 
 def do_this_first(source='old_datasets.jsonl', target='hri.json', group_source="https://hri.dataportaali.com/data"):
     new_hri_docs = read_jsonl(source)
