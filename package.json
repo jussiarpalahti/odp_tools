@@ -2,15 +2,21 @@
   "name": "hrisiirto",
   "version": "1.0.0",
   "description": "",
-  "main": "convert.js",
+  "main": "init.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node build/convert.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "R": "ramda || true",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/lodash": "^4.14.62",
     "@types/node": "^7.0.12",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "ramda-cli": "^1.6.0",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.7.0-dev.20171130"
   }
 }
