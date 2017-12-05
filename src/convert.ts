@@ -40,7 +40,6 @@ function translate_fields(doc:OriginalDataset):TranslatedFields {
         }
 
         switch (identifier) {
-            
             case "title":
                 translations.title[language] = field.value;
                 break;
@@ -55,8 +54,7 @@ function translate_fields(doc:OriginalDataset):TranslatedFields {
         
             case "description":
                 translations.description[language] = field.value;
-                break;
-        
+                break;        
         }
 
     }
@@ -69,6 +67,7 @@ function translate_fields(doc:OriginalDataset):TranslatedFields {
 function convert(doc:OriginalDataset):NewDataset {
 
     let odp_doc = {} as NewDataset;
+    let translations = translate_fields(doc);
 
     odp_doc.author = doc.author;
     odp_doc.author_email = doc.author_email;
@@ -93,7 +92,9 @@ function convert(doc:OriginalDataset):NewDataset {
     odp_doc.metadata_created = doc.metadata_created;
     odp_doc.metadata_modified = doc.metadata_modified;
     odp_doc.name = doc.name;
+    odp_doc.name_translated = translations.name;
     odp_doc.notes = doc.notes;
+    odp_doc.notes_translated = translations.notes;
 
     // doc.notes_rendered
 
@@ -141,9 +142,7 @@ function convert(doc:OriginalDataset):NewDataset {
     odp_doc.state = doc.state;
     odp_doc.tags = doc.tags;
     odp_doc.title = doc.title;
-    odp_doc.title_translated = <TitleTranslated> {
-        fi: doc.title
-    };
+    odp_doc.title_translated = translations.title;
 
     // doc.tracking_summary
 

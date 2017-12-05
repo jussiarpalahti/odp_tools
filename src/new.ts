@@ -113,6 +113,7 @@ export interface NewDataset {
     metadata_created: Date;
     metadata_modified: Date;
     name: string;
+    name_translated: NameTranslated;
     notes: string;
     notes_translated: NotesTranslated;
     num_resources: number;
