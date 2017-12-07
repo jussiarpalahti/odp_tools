@@ -19,17 +19,17 @@ def get_resources():
 
 
 def get_organizations():
-    
+
     from ckanapi import RemoteCKAN
     ua = 'ckanapiexample/1.0 (+http://hri.fi)'
-    
+
     c = RemoteCKAN('http://hri.fi',user_agent=ua)
     g = c.action.group_list()
-    
+
     all_orgs = c.action.organization_list(all_fields=True)
-    
+
     inuse_orgs = set([r['owner_org'] for r in packages])
-    
+
     ok_orgs = [i for i in all_orgs if i['id'] in inuse_orgs]
 
     json.dump(ok_orgs, open("orgs.json",'w'), indent=2)
@@ -42,7 +42,7 @@ def add_tags(new_hri_docs):
 
     from ckanapi import RemoteCKAN
     ua = 'ckanapiexample/1.0 (+http://hri.fi)'
-    
+
     c = RemoteCKAN('http://hri.fi',user_agent=ua)
 
     tags = c.action.tag_list(all_fields=True)
@@ -50,21 +50,21 @@ def add_tags(new_hri_docs):
 
     yes_tags = set()
     no_tags = set()
-    
+
     for doc in new_hri_docs:
-    
+
         doc_tags = []
-    
+
         for doc_group in doc.get('tags', []):
-    
+
             gdata = tags_data.get(doc_group)
-    
+
             if gdata:
                 doc_tags.append(gdata)
                 yes_tags.add(doc_group)
             else:
                 no_tags.add(doc_group)
-    
+
         if doc_tags:
             doc['tags'] = doc_tags
 
@@ -111,8 +111,8 @@ from ckanapi import RemoteCKAN
 def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
 
     group_map = cats_to_groups_map()
-    
-    c = RemoteCKAN(ckan_source, user_agent='ckanapiexample/1.0')  
+
+    c = RemoteCKAN(ckan_source, user_agent='ckanapiexample/1.0')
     groups = c.action.group_list(all_fields=True)
     groups_data = dict(
         ((g['name'], g) for g in groups)
@@ -120,19 +120,19 @@ def add_groups(new_hri_docs, ckan_source="https://hri.dataportaali.com/data"):
 
     yes_groups = set()
     no_groups = set()
-    
+
     for doc in new_hri_docs:
-        
+
         cats = get_cat(doc)
         doc_groups = []
-    
+
         for cat in cats:
-    
+
             gdata = groups_data.get(group_map.get(cat))
-    
+
             if gdata:
                 doc_groups.append(gdata)
-        
+
         if doc_groups:
             doc['groups'] = doc_groups
 
@@ -147,7 +147,7 @@ def read_gzip_jsonl(doc):
 
 
 def switch_new_owners(
-    new_hri_docs, 
+    new_hri_docs,
     new_owners_doc='new_hri_orgs.json',
     old_owners_doc='old_hri_orgs.json'):
 
@@ -161,14 +161,24 @@ def switch_new_owners(
             doc['owner_org'] = new_owners[old_owners[doc['owner_org']]]
         else:
             problems.append(doc)
-    
+
     return problems
+
+
+import operator
+def set_temporary_maintainer_email(docs):
+    return [operator.setitem(t, 'maintainer_email','dev@hel.fi') for t in docs if not t['maintainer_email']]
+
 
 def do_this_first(source='old_datasets.jsonl', target='hri.json', group_source="https://hri.dataportaali.com/data"):
     new_hri_docs = read_jsonl(source)
     add_groups(new_hri_docs, group_source)
-    result = [json.dumps(doc) for doc in new_hri_docs]
-    open(target, 'w').write('\n'.join(result))
+    set_temporary_maintainer_email(new_hri_docs)
+    write_jsonl(new_hri_docs, target)
+
+
+def write_jsonl(docs, target):
+    open(target, 'w').write('\n'.join((json.dumps(doc) for doc in docs)))
 
 
 def do_the_dance():
@@ -186,4 +196,3 @@ def do_the_dance():
 
 if __name__ == '__main__':
     do_the_dance()
-
