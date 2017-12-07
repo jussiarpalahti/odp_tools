@@ -22,10 +22,19 @@ function translate_fields(doc:OriginalDataset):TranslatedFields {
     // TODO: external_reference field?
 
     let translations = <TranslatedFields>{
-        title: {},
-        name: {},
-        notes: {},
-        description: {}
+        title: {
+          "fi": doc.title
+        },
+        name: {
+          "fi": doc.name
+        },
+        notes: {
+          "fi": doc.notes
+        },
+        description: {
+          // TODO: description field is for resources only?
+          // "fi": doc.description
+        }
     }
 
     for (let field of doc.extras) {
@@ -47,14 +56,14 @@ function translate_fields(doc:OriginalDataset):TranslatedFields {
             case "name":
                 translations.name[language] = field.value;
                 break;
-            
+
             case "notes":
                 translations.notes[language] = field.value;
                 break;
-        
+
             case "description":
                 translations.description[language] = field.value;
-                break;        
+                break;
         }
 
     }
