@@ -120,6 +120,9 @@ function convert(doc:OriginalDataset):NewDataset {
         ores.cache_url = res.cache_url;
         ores.created = res.created;
         ores.description = res.description;
+        ores.description_translated = {
+            fi: res.description
+        }
         ores.format = res.format;
         ores.hash = res.hash;
 
@@ -129,6 +132,9 @@ function convert(doc:OriginalDataset):NewDataset {
         ores.mimetype = res.mimetype;
         ores.mimetype_inner = res.mimetype_inner;
         ores.name = res.name;
+        ores.name_translated = {
+            fi: res.name
+        }
 
         // res.package_id
 
@@ -176,10 +182,10 @@ let old_packages = old as OriginalDataset[];
 let result = [] as string[];
 
 for (let doc of old_packages) {
-    // Output is in JSON stream format meaning new line separated objects
     result.push(JSON.stringify(convert(doc)));
 }
 
+// Output is in JSON stream format meaning new line separated objects
 fs.writeFileSync('out.json', result.join("\n"), {encoding: 'utf8'});
 
 console.log("conversion done");

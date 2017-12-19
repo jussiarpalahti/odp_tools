@@ -34,9 +34,9 @@ export interface Organization {
 }
 
 export interface DescriptionTranslated {
-    en: string;
-    fi: string;
-    sv: string;
+    en?: string;
+    fi?: string;
+    sv?: string;
     [key:string]: string;
 }
 
