@@ -1,6 +1,4 @@
 
-import { DateTime } from 'luxon';
-
 export interface Group {
     description?: string;
     display_name?: string;
@@ -98,8 +96,8 @@ export interface NewDataset {
     author?: any;
     author_email?: any;
     creator_user_id: string;
-    date_released: DateTime|string;
-    date_updated: DateTime|string;
+    date_released: string;
+    date_updated: string;
     external_urls: string[];
     geographical_coverage: string[];
     global_id: string;

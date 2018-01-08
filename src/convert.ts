@@ -7,7 +7,7 @@ import * as fs from "fs";
 import { DateTime } from 'luxon';
 import { fail } from 'assert';
 
-function get_date(date_string:string):DateTime|string {
+function get_date(date_string:string):string {
     
     let d = DateTime.fromString(date_string, 'dd/mm/yyyy');
     
@@ -18,14 +18,14 @@ function get_date(date_string:string):DateTime|string {
         }
     }
     
-    return d.isValid ? d : "DATE_ERROR";
+    return d.isValid ? d.toISODate() : "DATE_ERROR";
 
 }
 
 
 interface Extras {
-    date_released: DateTime|string;
-    date_updated: DateTime|string;
+    date_released: string;
+    date_updated: string;
 }
 
 function get_extras(doc:OriginalDataset):Extras {
