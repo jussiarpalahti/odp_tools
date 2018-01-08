@@ -4,7 +4,53 @@ import {OriginalDataset} from './old';
 
 import * as _ from 'lodash';
 import * as fs from "fs";
+import { DateTime } from 'luxon';
+import { fail } from 'assert';
 
+function get_date(date_string:string):DateTime|string {
+    
+    let d = DateTime.fromString(date_string, 'dd/mm/yyyy');
+    
+    if (d.isValid === false) {
+        d =  DateTime.fromString(date_string, 'yyyy-yy-dd');
+        if (!d.isValid) {
+            console.log(date_string, d, d.isValid, d.invalidReason);
+        }
+    }
+    
+    return d.isValid ? d : "DATE_ERROR";
+
+}
+
+
+interface Extras {
+    date_released: DateTime|string;
+    date_updated: DateTime|string;
+}
+
+function get_extras(doc:OriginalDataset):Extras {
+    /*
+        Get various extras fields from doc into one object
+    */
+    
+    let extras = <Extras>{};
+
+    for (let field of doc.extras) {
+
+        switch (field.key) {
+            case "date_released":
+                extras.date_released = field.value !== '' ? get_date(field.value) : '';
+                break;
+            case "date_updated":
+                extras.date_updated = field.value !== '' ? get_date(field.value) : '';
+                break;
+        }
+
+    }
+
+    return extras;
+
+}
 
 interface TranslatedFields {
     title: TitleTranslated;
@@ -12,7 +58,6 @@ interface TranslatedFields {
     notes: NotesTranslated;
     description: DescriptionTranslated;
 }
-
 
 function translate_fields(doc:OriginalDataset):TranslatedFields {
     /*
@@ -77,11 +122,12 @@ function convert(doc:OriginalDataset):NewDataset {
 
     let odp_doc = {} as NewDataset;
     let translations = translate_fields(doc);
+    let extras = get_extras(doc);
 
     odp_doc.author = doc.author;
     odp_doc.author_email = doc.author_email;
-    odp_doc.date_released = "2017-03-08"; // TODO: Fix me
-    odp_doc.date_updated = "2017-03-08"; // TODO: Fix me
+    odp_doc.date_released = extras.date_released;
+    odp_doc.date_updated = extras.date_updated;
 
     // doc.ckan_url;
     // doc.extras;

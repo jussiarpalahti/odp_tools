@@ -15,8 +15,12 @@
     "@types/lodash": "^4.14.62",
     "@types/node": "^7.0.12",
     "lodash": "^4.17.4",
+    "luxon": "^0.2.12",
     "ramda-cli": "^1.6.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.7.0-dev.20171130"
+  },
+  "devDependencies": {
+    "@types/luxon": "^0.2.2"
   }
 }
