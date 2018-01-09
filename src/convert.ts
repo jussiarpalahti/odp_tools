@@ -39,10 +39,10 @@ function get_extras(doc:OriginalDataset):Extras {
 
         switch (field.key) {
             case "date_released":
-                extras.date_released = field.value !== '' ? get_date(field.value) : '';
+                extras.date_released = field.value !== '' ? get_date(field.value) : '1970-01-01';
                 break;
             case "date_updated":
-                extras.date_updated = field.value !== '' ? get_date(field.value) : '';
+                extras.date_updated = field.value !== '' ? get_date(field.value) : '1970-01-01';
                 break;
         }
 
@@ -179,9 +179,17 @@ function convert(doc:OriginalDataset):NewDataset {
         ores.last_modified = res.last_modified;
         ores.mimetype = res.mimetype;
         ores.mimetype_inner = res.mimetype_inner;
-        ores.name = res.name;
-        ores.name_translated = {
-            fi: res.name
+
+        if (res.name) {
+            ores.name = res.name;
+            ores.name_translated = {
+                fi: res.name
+            }
+        } else {
+            ores.name = res.description;
+            ores.name_translated = {
+                fi: res.description
+            }
         }
 
         // res.package_id
@@ -220,7 +228,7 @@ function convert(doc:OriginalDataset):NewDataset {
 console.log("converting");
 
 let old = [];
-let docs = fs.readFileSync('hri.json', 'utf8');
+let docs = fs.readFileSync('hri_temp.json', 'utf8');
 for (let doc of docs.split('\n')) {
     old.push(JSON.parse(doc));
 }
