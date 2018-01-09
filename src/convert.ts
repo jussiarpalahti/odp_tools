@@ -132,6 +132,8 @@ function convert(doc:OriginalDataset):NewDataset {
     // doc.ckan_url;
     // doc.extras;
 
+    // Only finnish tags in old datasets
+    odp_doc.keywords = {fi: doc.tags.map(tag => tag.name)};
 
     odp_doc.groups = doc.groups;
     odp_doc.geographical_coverage = ['helsinki']; // TODO: Fix me

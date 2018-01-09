@@ -1,4 +1,13 @@
 
+export interface Tag {
+    name: string;
+    display_name?: string​;
+​​​​​    id?: string;
+​​​​​    revision_timestamp?: string;
+​​​​​    state?: string;
+​​​​​    vocabulary_id?: string;
+}
+
 export interface Extras {
     agency: string;
     categories: string;
@@ -83,7 +92,7 @@ export interface OriginalDataset {
     resources: Resource[];
     revision_id: string;
     state: string;
-    tags: string[];
+    tags: Tag[];
     title: string;
     tracking_summary: TrackingSummary;
     type: string;
