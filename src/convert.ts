@@ -9,17 +9,17 @@ import { fail } from 'assert';
 
 function get_date(date_string:string):string {
     
-    let d = DateTime.fromString(date_string, 'dd/mm/yyyy');
-    
-    if (d.isValid === false) {
+    let d;
+    if (date_string.search('/') !== -1) {
+        d = DateTime.fromString(date_string, 'dd/mm/yyyy');        
+    } else {
         d =  DateTime.fromString(date_string, 'yyyy-yy-dd');
-        if (!d.isValid) {
-            console.log(date_string, d, d.isValid, d.invalidReason);
-        }
     }
     
+    if (d.isValid === false) {    
+        console.log(date_string, d, d.isValid, d.invalidReason);
+    }
     return d.isValid ? d.toISODate() : "DATE_ERROR";
-
 }
 
 
