@@ -96,8 +96,8 @@ export interface NewDataset {
     author?: any;
     author_email?: any;
     creator_user_id: string;
-    date_released: string;
-    date_updated: string;
+    date_released?: string;
+    date_updated?: string;
     external_urls: string[];
     geographical_coverage: string[];
     global_id: string;

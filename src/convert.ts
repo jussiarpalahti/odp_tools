@@ -5,21 +5,15 @@ import {OriginalDataset} from './old';
 import * as _ from 'lodash';
 import * as fs from "fs";
 import { DateTime } from 'luxon';
-import { fail } from 'assert';
 
 function get_date(date_string:string):string {
-    
     let d;
     if (date_string.search('/') !== -1) {
-        d = DateTime.fromString(date_string, 'dd/mm/yyyy');        
+        return '1970-01-01' // ambiguous dates are defaulted to this date
     } else {
         d =  DateTime.fromString(date_string, 'yyyy-yy-dd');
+        return d.isValid ? d.toISODate() : "1970-01-01";  // ambiguous dates are defaulted to this date
     }
-    
-    if (d.isValid === false) {    
-        console.log(date_string, d, d.isValid, d.invalidReason);
-    }
-    return d.isValid ? d.toISODate() : "DATE_ERROR";
 }
 
 
@@ -39,10 +33,10 @@ function get_extras(doc:OriginalDataset):Extras {
 
         switch (field.key) {
             case "date_released":
-                extras.date_released = field.value !== '' ? get_date(field.value) : '1970-01-01';
+                extras.date_released = field.value !== '' ? get_date(field.value) : null;
                 break;
             case "date_updated":
-                extras.date_updated = field.value !== '' ? get_date(field.value) : '1970-01-01';
+                extras.date_updated = field.value !== '' ? get_date(field.value) : null;
                 break;
         }
 
@@ -126,8 +120,9 @@ function convert(doc:OriginalDataset):NewDataset {
 
     odp_doc.author = doc.author;
     odp_doc.author_email = doc.author_email;
-    odp_doc.date_released = extras.date_released;
-    odp_doc.date_updated = extras.date_updated;
+    
+    if (extras.date_released) odp_doc.date_released = extras.date_released;
+    if (extras.date_updated) odp_doc.date_updated = extras.date_updated;
 
     // doc.ckan_url;
     // doc.extras;
