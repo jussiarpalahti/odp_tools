@@ -20,6 +20,7 @@ function get_date(date_string:string):string {
 interface Extras {
     date_released: string;
     date_updated: string;
+    geographic_coverage: string[];
 }
 
 function get_extras(doc:OriginalDataset):Extras {
@@ -37,6 +38,13 @@ function get_extras(doc:OriginalDataset):Extras {
                 break;
             case "date_updated":
                 extras.date_updated = field.value !== '' ? get_date(field.value) : null;
+                break;
+            case "geographic_coverage":
+                if (field.value.search('{') !== -1) {
+                    extras.geographic_coverage = _.trim(field.value).slice(1, -1).replace(new RegExp('"', "g"), '').split(',');
+                } else {
+                    extras.geographic_coverage = [field.value];
+                }
                 break;
         }
 
@@ -131,7 +139,7 @@ function convert(doc:OriginalDataset):NewDataset {
     odp_doc.keywords = {fi: doc.tags.map(tag => tag.name)};
 
     odp_doc.groups = doc.groups;
-    odp_doc.geographical_coverage = ['helsinki']; // TODO: Fix me
+    odp_doc.geographical_coverage = extras.geographic_coverage;
     odp_doc.license_id = "CC-BY-4.0"; // TODO: Fix me
 
 
