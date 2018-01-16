@@ -41,7 +41,7 @@ function get_extras(doc:OriginalDataset):Extras {
                 break;
             case "geographic_coverage":
                 if (field.value.search('{') !== -1) {
-                    extras.geographic_coverage = _.trim(field.value).slice(1, -1).replace(new RegExp('"', "g"), '').split(',');
+                    extras.geographic_coverage = _.trim(field.value).slice(1, -1).replace(new RegExp('"', "g"), '').split(',').filter(_.identity);
                 } else {
                     extras.geographic_coverage = [field.value];
                 }
