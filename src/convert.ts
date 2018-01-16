@@ -6,7 +6,22 @@ import * as _ from 'lodash';
 import * as fs from "fs";
 import { DateTime } from 'luxon';
 
-function get_date(date_string:string):string {
+
+const to_ISO = (d:string) => DateTime.fromISO(d).toISODate();
+
+
+export function get_date_released(date_string:string, created:string):string {
+    let d;
+    if (date_string.search('/') !== -1) {
+        return to_ISO(created) // ambiguous dates are changed to doc metadata creation date
+    } else {
+        d =  DateTime.fromString(date_string, 'yyyy-yy-dd');
+        return d.isValid ? d.toISODate() : "1970-01-01";  // ambiguous dates are defaulted to this date
+    }
+}
+
+
+export function get_date_updated(date_string:string):string {
     let d;
     if (date_string.search('/') !== -1) {
         return '1970-01-01' // ambiguous dates are defaulted to this date
@@ -34,10 +49,10 @@ function get_extras(doc:OriginalDataset):Extras {
 
         switch (field.key) {
             case "date_released":
-                extras.date_released = field.value !== '' ? get_date(field.value) : null;
+                extras.date_released = field.value !== '' ? get_date_released(field.value, doc.metadata_created) : null;
                 break;
             case "date_updated":
-                extras.date_updated = field.value !== '' ? get_date(field.value) : null;
+                extras.date_updated = field.value !== '' ? get_date_updated(field.value) : null;
                 break;
             case "geographic_coverage":
                 if (field.value.search('{') !== -1) {

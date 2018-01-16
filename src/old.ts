@@ -38,7 +38,7 @@ export interface TrackingSummary {
 export interface Resource {
     cache_last_updated?: any;
     cache_url?: any;
-    created: Date;
+    created: string;
     description: string;
     format: string;
     hash: string;
@@ -79,8 +79,8 @@ export interface OriginalDataset {
     license_id: string;
     maintainer?: any;
     maintainer_email?: any;
-    metadata_created: Date;
-    metadata_modified: Date;
+    metadata_created: string;
+    metadata_modified: string;
     name: string;
     notes: string;
     notes_rendered: string;
