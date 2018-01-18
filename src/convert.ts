@@ -13,10 +13,17 @@ const to_ISO = (d:string) => DateTime.fromISO(d).toISODate();
 export function get_date_released(date_string:string, created:string):string {
     let d;
     if (date_string.search('/') !== -1) {
-        return to_ISO(created) // ambiguous dates are changed to doc metadata creation date
+        let created_date = to_ISO(created) // ambiguous dates are changed to doc metadata creation date
+        if (!created_date) return "1971-01-01"
+        else return created_date;
     } else {
         d =  DateTime.fromString(date_string, 'yyyy-yy-dd');
-        return d.isValid ? d.toISODate() : "1970-01-01";  // ambiguous dates are defaulted to this date
+        if (d.isValid) return d.toISODate()
+        else {
+            let created_date = to_ISO(created) // ambiguous dates are changed to doc metadata creation date
+            if (!created_date) return "1971-01-01"
+            else return created_date;
+        }
     }
 }
 
@@ -36,7 +43,13 @@ interface Extras {
     date_released: string;
     date_updated: string;
     geographic_coverage: string[];
+    search_info: string;
 }
+
+function fix_areas(area:string):string {
+    return area.replace(/\W+/g, " ");
+}
+
 
 function get_extras(doc:OriginalDataset):Extras {
     /*
@@ -49,17 +62,25 @@ function get_extras(doc:OriginalDataset):Extras {
 
         switch (field.key) {
             case "date_released":
-                extras.date_released = field.value !== '' ? get_date_released(field.value, doc.metadata_created) : null;
+                extras.date_released = get_date_released(field.value, doc.metadata_created);
                 break;
             case "date_updated":
-                extras.date_updated = field.value !== '' ? get_date_updated(field.value) : null;
+                extras.date_updated = get_date_updated(field.value);
                 break;
             case "geographic_coverage":
                 if (field.value.search('{') !== -1) {
-                    extras.geographic_coverage = _.trim(field.value).slice(1, -1).replace(new RegExp('"', "g"), '').split(',').filter(_.identity);
+                    extras.geographic_coverage = _.trim(field.value)
+                        .slice(1, -1).
+                        replace(new RegExp('"', "g"), '').
+                        split(',').
+                        filter(_.identity).
+                        map(a => fix_areas(a));
                 } else {
-                    extras.geographic_coverage = [field.value];
+                    extras.geographic_coverage = [fix_areas(field.value)];
                 }
+                break;
+            case "search_info":
+                extras.search_info = field.value;
                 break;
         }
 
@@ -146,6 +167,8 @@ function convert(doc:OriginalDataset):NewDataset {
     
     if (extras.date_released) odp_doc.date_released = extras.date_released;
     if (extras.date_updated) odp_doc.date_updated = extras.date_updated;
+
+    if (extras.search_info) odp_doc.search_synonyms = extras.search_info;
 
     // doc.ckan_url;
     // doc.extras;
@@ -246,7 +269,7 @@ function convert(doc:OriginalDataset):NewDataset {
 console.log("converting");
 
 let old = [];
-let docs = fs.readFileSync('hri_temp.json', 'utf8');
+let docs = fs.readFileSync('hri_temp.jsonl', 'utf8');
 for (let doc of docs.split('\n')) {
     old.push(JSON.parse(doc));
 }
@@ -260,6 +283,6 @@ for (let doc of old_packages) {
 }
 
 // Output is in JSON stream format meaning new line separated objects
-fs.writeFileSync('out.json', result.join("\n"), {encoding: 'utf8'});
+fs.writeFileSync('to_qa_converted.json', result.join("\n"), {encoding: 'utf8'});
 
 console.log("conversion done");

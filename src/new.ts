@@ -124,6 +124,7 @@ export interface NewDataset {
     relationships_as_object: any[];
     relationships_as_subject: any[];
     resources: NewResource[];
+    search_synonyms: string;
     state: string;
     tags: any[];
     title: string;

@@ -20,6 +20,7 @@ export interface Extras {
     geographic_granularity: string;
     notes_en: string;
     notes_se: string;
+    search_info: string;
     source: string;
     taxonomy_url: string;
     temporal_coverage_from: string;
